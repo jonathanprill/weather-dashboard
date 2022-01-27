@@ -21,11 +21,11 @@
 
             <!-- Search for City Column -->
             <div class="col-3">
-                <div class="city-search">
+                <form id="city-form">
                     <h2>Search for City:</h2>
-                    <input placeholder="Enter a City" />
-                    <button>Search</button>
-                </div>
+                    <input placeholder="Enter a City" name="city" id="city-input" type="text" />
+                    <button type="submit">Search</button>
+                </form>
                 <div id="recentSearches">
 
                 </div>
@@ -33,9 +33,12 @@
 
             <!-- Display Weather Column -->
             <div class="col-9">
-                <div id="weatherSpecs">
-                    <h2>Weather Specs Here</h2>
-                </div>
+                <article class="weather-specs">
+                    <div class="d-flex h3" id="weather-specs"></div>
+                    
+
+                </article>
+
                 <div id="fiveDay">
                     <h2>5 Day forecast Here</h2>
                 </div>
@@ -50,8 +53,8 @@
     </div>
 
 
-
-
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>

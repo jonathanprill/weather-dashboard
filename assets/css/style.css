@@ -20,7 +20,7 @@ header {
     color: var(--primary-color);
 }
 
-.city-search {
+form {
     padding: 15px 0 15px 0;
     border-bottom: 1px solid white;
 }
@@ -43,8 +43,13 @@ input {
     border: none;
     font-size: 1.2rem;
     text-align: center;
-    
 }
+
+.weather-specs {
+    border: 1px solid white;
+    padding: 10px;
+    margin: 15px;
+}  
 
   
   
