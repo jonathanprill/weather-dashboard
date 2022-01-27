@@ -1,0 +1,51 @@
+:root {
+    --primary-color: #08fdd8;
+    --secondary-color: #FD1056;
+}
+
+
+body {
+    background-color: #1d1d1d;
+    color: white;
+}
+
+
+
+/* The side navigation menu */
+header {
+    height: 50px;
+    background-color: rgb(20, 20, 20); 
+    display: flex;
+    justify-content: center;
+    color: var(--primary-color);
+}
+
+.city-search {
+    padding: 15px 0 15px 0;
+    border-bottom: 1px solid white;
+}
+
+button {
+  font-size: 1.2rem;
+  text-decoration:none;
+  width: 100%;
+  /* display: block; */
+  margin: 25px 0;
+  border-radius: 5px;
+  color: rgb(20, 20, 20);
+  border: none;
+  background-color: var(--primary-color);
+}
+  
+input {
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    font-size: 1.2rem;
+    text-align: center;
+    
+}
+
+  
+  
+  
