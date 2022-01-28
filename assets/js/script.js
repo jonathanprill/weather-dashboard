@@ -32,6 +32,11 @@ var cityFormEl = document.querySelector("#city-form");
 var cityInputEl = document.querySelector("#city-input");
 var weatherSpecsEl = document.querySelector("#weather-specs");
 var locationEl = document.querySelector("#location");
+var forecastOneEl = document.querySelector("#forecast-1");
+var forecastTwoEl = document.querySelector("#forecast-2");
+var forecastThreeEl = document.querySelector("#forecast-3");
+var forecastFourEl = document.querySelector("#forecast-4");
+var forecastFiveEl = document.querySelector("#forecast-5");
 
 
 var formSubmitHandler = function(event) {
@@ -67,6 +72,11 @@ var getCityCoords = function(city) {
             var selectedCity = ("https://api.openweathermap.org/data/2.5/onecall?lat=" + data[0].lat + "&lon=" + data[0].lon + "&units=imperial&appid=6ba36869088d690b197fddb2f2b348d2");
             displayWeather(selectedCity);
             // console.log(ApiCoords)
+            displayForecast(selectedCity);
+            displayForecast2(selectedCity);
+            displayForecast3(selectedCity);
+            displayForecast4(selectedCity);
+            displayForecast5(selectedCity);
         });
         } else {
             alert("Error: City Not Found")
@@ -154,4 +164,224 @@ var displayWeather = function(selectedCity) {
         })
     };
 
+
+
+/////////////////////////////////5 day Forecasting/////////////////////////////////
+
+
+/////////////Day 1/////////////////
+    var displayForecast = function(selectedCity) {
+     
+        fetch(selectedCity).then(function(response) {
+        
+                response.json().then(function(data) {
     
+                    //Displays Icon
+                    //console.log(data.current.weather[0].icon);
+                    var currentIconEl = document.createElement("img")
+                    currentIconEl.src = "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png"
+                    forecastOneEl.append(currentIconEl)
+    
+                    //Displays current Temp
+                    var currentTempEl = document.createElement("p")
+                    currentTempEl.textContent = "Temp: " + data.current.temp + " \xB0F"
+                    forecastOneEl.append(currentTempEl);
+    
+                    //Displays current wind
+                    var currentWindEl = document.createElement("p")
+                    currentWindEl.textContent = "Wind: " + data.current.wind_speed + " MPH"
+                    forecastOneEl.append(currentWindEl);
+    
+                    //Displays current humidity
+                    var currentHumidityEl = document.createElement("p")
+                    currentHumidityEl.textContent = "Humidity: " + data.current.humidity + " %"
+                    forecastOneEl.append(currentHumidityEl);
+    
+                    //Displays current UV Index
+                    var currentUVIndexEl = document.createElement("p")
+                    currentUVIndexEl.textContent = "UV Index: " + data.current.uvi
+                    forecastOneEl.append(currentUVIndexEl);
+
+                    forecastOneEl.classList.add('forecast-box');
+                   
+    
+                });
+                
+        });
+        
+    
+    } ;
+
+/////////////Day 2/////////////////
+
+var displayForecast2 = function(selectedCity) {
+     
+    fetch(selectedCity).then(function(response) {
+    
+            response.json().then(function(data) {
+
+                //Displays Icon
+                //console.log(data.current.weather[0].icon);
+                var currentIconEl = document.createElement("img")
+                currentIconEl.src = "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png"
+                forecastTwoEl.append(currentIconEl)
+
+                //Displays current Temp
+                var currentTempEl = document.createElement("p")
+                currentTempEl.textContent = "Temp: " + data.current.temp + " \xB0F"
+                forecastTwoEl.append(currentTempEl);
+
+                //Displays current wind
+                var currentWindEl = document.createElement("p")
+                currentWindEl.textContent = "Wind: " + data.current.wind_speed + " MPH"
+                forecastTwoEl.append(currentWindEl);
+
+                //Displays current humidity
+                var currentHumidityEl = document.createElement("p")
+                currentHumidityEl.textContent = "Humidity: " + data.current.humidity + " %"
+                forecastTwoEl.append(currentHumidityEl);
+
+                //Displays current UV Index
+                var currentUVIndexEl = document.createElement("p")
+                currentUVIndexEl.textContent = "UV Index: " + data.current.uvi
+                forecastTwoEl.append(currentUVIndexEl);
+
+                forecastTwoEl.classList.add('forecast-box');
+               
+
+            });
+            
+    });
+    
+
+} ;
+
+/////////////Day 3/////////////////
+var displayForecast3 = function(selectedCity) {
+     
+    fetch(selectedCity).then(function(response) {
+    
+            response.json().then(function(data) {
+
+                //Displays Icon
+                //console.log(data.current.weather[0].icon);
+                var currentIconEl = document.createElement("img")
+                currentIconEl.src = "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png"
+                forecastThreeEl.append(currentIconEl)
+
+                //Displays current Temp
+                var currentTempEl = document.createElement("p")
+                currentTempEl.textContent = "Temp: " + data.current.temp + " \xB0F"
+                forecastThreeEl.append(currentTempEl);
+
+                //Displays current wind
+                var currentWindEl = document.createElement("p")
+                currentWindEl.textContent = "Wind: " + data.current.wind_speed + " MPH"
+                forecastThreeEl.append(currentWindEl);
+
+                //Displays current humidity
+                var currentHumidityEl = document.createElement("p")
+                currentHumidityEl.textContent = "Humidity: " + data.current.humidity + " %"
+                forecastThreeEl.append(currentHumidityEl);
+
+                //Displays current UV Index
+                var currentUVIndexEl = document.createElement("p")
+                currentUVIndexEl.textContent = "UV Index: " + data.current.uvi
+                forecastThreeEl.append(currentUVIndexEl);
+
+                forecastThreeEl.classList.add('forecast-box');
+               
+
+            });
+            
+    });
+    
+
+} ;
+
+
+/////////////Day 4/////////////////
+var displayForecast4 = function(selectedCity) {
+     
+    fetch(selectedCity).then(function(response) {
+    
+            response.json().then(function(data) {
+
+                //Displays Icon
+                //console.log(data.current.weather[0].icon);
+                var currentIconEl = document.createElement("img")
+                currentIconEl.src = "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png"
+                forecastFourEl.append(currentIconEl)
+
+                //Displays current Temp
+                var currentTempEl = document.createElement("p")
+                currentTempEl.textContent = "Temp: " + data.current.temp + " \xB0F"
+                forecastFourEl.append(currentTempEl);
+
+                //Displays current wind
+                var currentWindEl = document.createElement("p")
+                currentWindEl.textContent = "Wind: " + data.current.wind_speed + " MPH"
+                forecastFourEl.append(currentWindEl);
+
+                //Displays current humidity
+                var currentHumidityEl = document.createElement("p")
+                currentHumidityEl.textContent = "Humidity: " + data.current.humidity + " %"
+                forecastFourEl.append(currentHumidityEl);
+
+                //Displays current UV Index
+                var currentUVIndexEl = document.createElement("p")
+                currentUVIndexEl.textContent = "UV Index: " + data.current.uvi
+                forecastFourEl.append(currentUVIndexEl);
+
+                forecastFourEl.classList.add('forecast-box');
+               
+
+            });
+            
+    });
+    
+
+} ;
+
+/////////////Day 5/////////////////
+var displayForecast5 = function(selectedCity) {
+     
+    fetch(selectedCity).then(function(response) {
+    
+            response.json().then(function(data) {
+
+                //Displays Icon
+                //console.log(data.current.weather[0].icon);
+                var currentIconEl = document.createElement("img")
+                currentIconEl.src = "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png"
+                forecastFiveEl.append(currentIconEl)
+
+                //Displays current Temp
+                var currentTempEl = document.createElement("p")
+                currentTempEl.textContent = "Temp: " + data.current.temp + " \xB0F"
+                forecastFiveEl.append(currentTempEl);
+
+                //Displays current wind
+                var currentWindEl = document.createElement("p")
+                currentWindEl.textContent = "Wind: " + data.current.wind_speed + " MPH"
+                forecastFiveEl.append(currentWindEl);
+
+                //Displays current humidity
+                var currentHumidityEl = document.createElement("p")
+                currentHumidityEl.textContent = "Humidity: " + data.current.humidity + " %"
+                forecastFiveEl.append(currentHumidityEl);
+
+                //Displays current UV Index
+                var currentUVIndexEl = document.createElement("p")
+                currentUVIndexEl.textContent = "UV Index: " + data.current.uvi
+                forecastFiveEl.append(currentUVIndexEl);
+
+                forecastFiveEl.classList.add('forecast-box');
+               
+
+            });
+            
+    });
+    
+
+} ;
