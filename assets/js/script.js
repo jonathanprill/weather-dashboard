@@ -101,7 +101,7 @@ var displayWeather = function(selectedCity) {
             response.json().then(function(data) {
 
                 //Displays Icon
-                console.log(data.current.weather[0].icon);
+                //console.log(data.current.weather[0].icon);
                 var currentIconEl = document.createElement("img")
                 currentIconEl.src = "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + "@2x.png"
                 weatherSpecsEl.append(currentIconEl)
@@ -175,32 +175,37 @@ var displayWeather = function(selectedCity) {
         fetch(selectedCity).then(function(response) {
         
                 response.json().then(function(data) {
-    
+
+                    //Displays Date
+                    var DateEl = document.createElement("h5")
+                    DateEl.textContent = moment().add(1, 'days').format('l')
+                    forecastOneEl.append(DateEl);
+                    
                     //Displays Icon
-                    //console.log(data.current.weather[0].icon);
+                    //console.log(data.daily[0].weather[0].icon);
                     var currentIconEl = document.createElement("img")
-                    currentIconEl.src = "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png"
+                    currentIconEl.src = "http://openweathermap.org/img/wn/" + data.daily[0].weather[0].icon + ".png"
                     forecastOneEl.append(currentIconEl)
     
                     //Displays current Temp
-                    var currentTempEl = document.createElement("p")
-                    currentTempEl.textContent = "Temp: " + data.current.temp + " \xB0F"
-                    forecastOneEl.append(currentTempEl);
+                    var TempEl = document.createElement("p")
+                    TempEl.textContent = "Temp: " + data.daily[0].temp.day + " \xB0F"
+                    forecastOneEl.append(TempEl);
     
                     //Displays current wind
-                    var currentWindEl = document.createElement("p")
-                    currentWindEl.textContent = "Wind: " + data.current.wind_speed + " MPH"
-                    forecastOneEl.append(currentWindEl);
+                    var WindEl = document.createElement("p")
+                    WindEl.textContent = "Wind: " + data.daily[0].wind_speed + " MPH"
+                    forecastOneEl.append(WindEl);
     
                     //Displays current humidity
-                    var currentHumidityEl = document.createElement("p")
-                    currentHumidityEl.textContent = "Humidity: " + data.current.humidity + " %"
-                    forecastOneEl.append(currentHumidityEl);
+                    var HumidityEl = document.createElement("p")
+                    HumidityEl.textContent = "Humidity: " + data.daily[0].humidity + " %"
+                    forecastOneEl.append(HumidityEl);
     
                     //Displays current UV Index
-                    var currentUVIndexEl = document.createElement("p")
-                    currentUVIndexEl.textContent = "UV Index: " + data.current.uvi
-                    forecastOneEl.append(currentUVIndexEl);
+                    var UVIndexEl = document.createElement("p")
+                    UVIndexEl.textContent = "UV Index: " + data.daily[0].uvi
+                    forecastOneEl.append(UVIndexEl);
 
                     forecastOneEl.classList.add('forecast-box');
                    
@@ -220,31 +225,35 @@ var displayForecast2 = function(selectedCity) {
     
             response.json().then(function(data) {
 
+                //Displays Date
+                var DateEl = document.createElement("h5")
+                DateEl.textContent = moment().add(2, 'days').format('l')
+                forecastTwoEl.append(DateEl);
+
                 //Displays Icon
-                //console.log(data.current.weather[0].icon);
-                var currentIconEl = document.createElement("img")
-                currentIconEl.src = "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png"
-                forecastTwoEl.append(currentIconEl)
+                var IconEl = document.createElement("img")
+                IconEl.src = "http://openweathermap.org/img/wn/" + data.daily[1].weather[0].icon + ".png"
+                forecastTwoEl.append(IconEl)
 
                 //Displays current Temp
-                var currentTempEl = document.createElement("p")
-                currentTempEl.textContent = "Temp: " + data.current.temp + " \xB0F"
-                forecastTwoEl.append(currentTempEl);
+                var TempEl = document.createElement("p")
+                TempEl.textContent = "Temp: " + data.daily[1].temp.day + " \xB0F"
+                forecastTwoEl.append(TempEl);
 
                 //Displays current wind
-                var currentWindEl = document.createElement("p")
-                currentWindEl.textContent = "Wind: " + data.current.wind_speed + " MPH"
-                forecastTwoEl.append(currentWindEl);
+                var WindEl = document.createElement("p")
+                WindEl.textContent = "Wind: " + data.daily[1].wind_speed + " MPH"
+                forecastTwoEl.append(WindEl);
 
                 //Displays current humidity
-                var currentHumidityEl = document.createElement("p")
-                currentHumidityEl.textContent = "Humidity: " + data.current.humidity + " %"
-                forecastTwoEl.append(currentHumidityEl);
+                var HumidityEl = document.createElement("p")
+                HumidityEl.textContent = "Humidity: " + data.daily[1].humidity + " %"
+                forecastTwoEl.append(HumidityEl);
 
                 //Displays current UV Index
-                var currentUVIndexEl = document.createElement("p")
-                currentUVIndexEl.textContent = "UV Index: " + data.current.uvi
-                forecastTwoEl.append(currentUVIndexEl);
+                var UVIndexEl = document.createElement("p")
+                UVIndexEl.textContent = "UV Index: " + data.daily[1].uvi
+                forecastTwoEl.append(UVIndexEl);
 
                 forecastTwoEl.classList.add('forecast-box');
                
@@ -263,31 +272,35 @@ var displayForecast3 = function(selectedCity) {
     
             response.json().then(function(data) {
 
+                //Displays Date
+                var DateEl = document.createElement("h5")
+                DateEl.textContent = moment().add(3, 'days').format('l')
+                forecastThreeEl.append(DateEl);
+
                 //Displays Icon
-                //console.log(data.current.weather[0].icon);
-                var currentIconEl = document.createElement("img")
-                currentIconEl.src = "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png"
-                forecastThreeEl.append(currentIconEl)
+                var IconEl = document.createElement("img")
+                IconEl.src = "http://openweathermap.org/img/wn/" + data.daily[2].weather[0].icon + ".png"
+                forecastThreeEl.append(IconEl)
 
                 //Displays current Temp
-                var currentTempEl = document.createElement("p")
-                currentTempEl.textContent = "Temp: " + data.current.temp + " \xB0F"
-                forecastThreeEl.append(currentTempEl);
+                var TempEl = document.createElement("p")
+                TempEl.textContent = "Temp: " + data.daily[2].temp.day + " \xB0F"
+                forecastThreeEl.append(TempEl);
 
                 //Displays current wind
-                var currentWindEl = document.createElement("p")
-                currentWindEl.textContent = "Wind: " + data.current.wind_speed + " MPH"
-                forecastThreeEl.append(currentWindEl);
+                var WindEl = document.createElement("p")
+                WindEl.textContent = "Wind: " + data.daily[2].wind_speed + " MPH"
+                forecastThreeEl.append(WindEl);
 
                 //Displays current humidity
-                var currentHumidityEl = document.createElement("p")
-                currentHumidityEl.textContent = "Humidity: " + data.current.humidity + " %"
-                forecastThreeEl.append(currentHumidityEl);
+                var HumidityEl = document.createElement("p")
+                HumidityEl.textContent = "Humidity: " + data.daily[2].humidity + " %"
+                forecastThreeEl.append(HumidityEl);
 
                 //Displays current UV Index
-                var currentUVIndexEl = document.createElement("p")
-                currentUVIndexEl.textContent = "UV Index: " + data.current.uvi
-                forecastThreeEl.append(currentUVIndexEl);
+                var UVIndexEl = document.createElement("p")
+                UVIndexEl.textContent = "UV Index: " + data.daily[2].uvi
+                forecastThreeEl.append(UVIndexEl);
 
                 forecastThreeEl.classList.add('forecast-box');
                
@@ -307,31 +320,35 @@ var displayForecast4 = function(selectedCity) {
     
             response.json().then(function(data) {
 
+                //Displays Date
+                var DateEl = document.createElement("h5")
+                DateEl.textContent = moment().add(4, 'days').format('l')
+                forecastFourEl.append(DateEl);
+
                 //Displays Icon
-                //console.log(data.current.weather[0].icon);
-                var currentIconEl = document.createElement("img")
-                currentIconEl.src = "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png"
-                forecastFourEl.append(currentIconEl)
+                var IconEl = document.createElement("img")
+                IconEl.src = "http://openweathermap.org/img/wn/" + data.daily[3].weather[0].icon + ".png"
+                forecastFourEl.append(IconEl)
 
                 //Displays current Temp
-                var currentTempEl = document.createElement("p")
-                currentTempEl.textContent = "Temp: " + data.current.temp + " \xB0F"
-                forecastFourEl.append(currentTempEl);
+                var TempEl = document.createElement("p")
+                TempEl.textContent = "Temp: " + data.daily[3].temp.day + " \xB0F"
+                forecastFourEl.append(TempEl);
 
                 //Displays current wind
-                var currentWindEl = document.createElement("p")
-                currentWindEl.textContent = "Wind: " + data.current.wind_speed + " MPH"
-                forecastFourEl.append(currentWindEl);
+                var WindEl = document.createElement("p")
+                WindEl.textContent = "Wind: " + data.daily[3].wind_speed + " MPH"
+                forecastFourEl.append(WindEl);
 
                 //Displays current humidity
-                var currentHumidityEl = document.createElement("p")
-                currentHumidityEl.textContent = "Humidity: " + data.current.humidity + " %"
-                forecastFourEl.append(currentHumidityEl);
+                var HumidityEl = document.createElement("p")
+                HumidityEl.textContent = "Humidity: " + data.daily[3].humidity + " %"
+                forecastFourEl.append(HumidityEl);
 
                 //Displays current UV Index
-                var currentUVIndexEl = document.createElement("p")
-                currentUVIndexEl.textContent = "UV Index: " + data.current.uvi
-                forecastFourEl.append(currentUVIndexEl);
+                var UVIndexEl = document.createElement("p")
+                UVIndexEl.textContent = "UV Index: " + data.daily[3].uvi
+                forecastFourEl.append(UVIndexEl);
 
                 forecastFourEl.classList.add('forecast-box');
                
@@ -350,31 +367,35 @@ var displayForecast5 = function(selectedCity) {
     
             response.json().then(function(data) {
 
+                //Displays Date
+                var DateEl = document.createElement("h5")
+                DateEl.textContent = moment().add(5, 'days').format('l')
+                forecastFiveEl.append(DateEl);
+
                 //Displays Icon
-                //console.log(data.current.weather[0].icon);
-                var currentIconEl = document.createElement("img")
-                currentIconEl.src = "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png"
-                forecastFiveEl.append(currentIconEl)
+                var IconEl = document.createElement("img")
+                IconEl.src = "http://openweathermap.org/img/wn/" + data.daily[4].weather[0].icon + ".png"
+                forecastFiveEl.append(IconEl)
 
                 //Displays current Temp
-                var currentTempEl = document.createElement("p")
-                currentTempEl.textContent = "Temp: " + data.current.temp + " \xB0F"
-                forecastFiveEl.append(currentTempEl);
+                var TempEl = document.createElement("p")
+                TempEl.textContent = "Temp: " + data.daily[4].temp.day + " \xB0F"
+                forecastFiveEl.append(TempEl);
 
                 //Displays current wind
-                var currentWindEl = document.createElement("p")
-                currentWindEl.textContent = "Wind: " + data.current.wind_speed + " MPH"
-                forecastFiveEl.append(currentWindEl);
+                var WindEl = document.createElement("p")
+                WindEl.textContent = "Wind: " + data.daily[4].wind_speed + " MPH"
+                forecastFiveEl.append(WindEl);
 
                 //Displays current humidity
-                var currentHumidityEl = document.createElement("p")
-                currentHumidityEl.textContent = "Humidity: " + data.current.humidity + " %"
-                forecastFiveEl.append(currentHumidityEl);
+                var HumidityEl = document.createElement("p")
+                HumidityEl.textContent = "Humidity: " + data.daily[4].humidity + " %"
+                forecastFiveEl.append(HumidityEl);
 
                 //Displays current UV Index
-                var currentUVIndexEl = document.createElement("p")
-                currentUVIndexEl.textContent = "UV Index: " + data.current.uvi
-                forecastFiveEl.append(currentUVIndexEl);
+                var UVIndexEl = document.createElement("p")
+                UVIndexEl.textContent = "UV Index: " + data.daily[4].uvi
+                forecastFiveEl.append(UVIndexEl);
 
                 forecastFiveEl.classList.add('forecast-box');
                
