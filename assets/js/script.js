@@ -7,27 +7,9 @@
 
 
 
-/////////////////////////////////////
 
 
-// var cityName = "Richmond"
-
-//getting api for city to lat long conversion
-// var ApiCoords = ("https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=1&appid=6ba36869088d690b197fddb2f2b348d2");
-
-//returned JSON to get Lat and Lon
-
-// fetch(ApiCoords).then(function(response) {
-    
-//     response.json().then(function(data) {
-//         //console.log(data[0].lat);
-//         console.log("https://api.openweathermap.org/data/2.5/onecall?lat=" + data[0].lat + "&lon=" + data[0].lon + "&appid=6ba36869088d690b197fddb2f2b348d2")
-//     });
-    
-// });
-
-
-/////////////////////////////////////
+/////////////On screen Elements/////////////////
 var cityFormEl = document.querySelector("#city-form");
 var cityInputEl = document.querySelector("#city-input");
 var weatherSpecsEl = document.querySelector("#weather-specs");
@@ -39,6 +21,8 @@ var forecastFourEl = document.querySelector("#forecast-4");
 var forecastFiveEl = document.querySelector("#forecast-5");
 
 
+
+/////////////On Submit Click/////////////////
 var formSubmitHandler = function(event) {
     event.preventDefault();
     
@@ -47,20 +31,25 @@ var formSubmitHandler = function(event) {
 
     if(city) {
         getCityCoords(city);
+        //RESETS ON SCREEN ELEMENTS WHEN NEW CITY INPUTED
         cityInputEl.value="";
         weatherSpecsEl.textContent="";
+        forecastOneEl.textContent ="";
+        forecastTwoEl.textContent ="";
+        forecastThreeEl.textContent ="";
+        forecastFourEl.textContent ="";
+        forecastFiveEl.textContent ="";
         getCityName(city);
     } else {
         alert("Please enter a City");
     }
   };
 
-
-
-cityFormEl.addEventListener("submit", formSubmitHandler);
+//cityFormEl.addEventListener("submit", formSubmitHandler);
 
 
 
+/////////////Converting city name to lat and lon/////////////////
 var getCityCoords = function(city) {
     //format the github api url
     var ApiCoords = ("https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=6ba36869088d690b197fddb2f2b348d2");
@@ -71,7 +60,6 @@ var getCityCoords = function(city) {
         response.json().then(function(data) {
             var selectedCity = ("https://api.openweathermap.org/data/2.5/onecall?lat=" + data[0].lat + "&lon=" + data[0].lon + "&units=imperial&appid=6ba36869088d690b197fddb2f2b348d2");
             displayWeather(selectedCity);
-            // console.log(ApiCoords)
             displayForecast(selectedCity);
             displayForecast2(selectedCity);
             displayForecast3(selectedCity);
@@ -84,7 +72,7 @@ var getCityCoords = function(city) {
        
     })
     .catch(function(error) {
-        //notice this `.catch()` getting chained onto the end of the ` .then()` method
+        //Chained onto the end of the ` .then()` method
         alert("Unable to connect to openweathermap.org");
     });
 };
@@ -92,8 +80,7 @@ var getCityCoords = function(city) {
 
 
 
-
-
+/////////////Displays current weather in main box/////////////////
 var displayWeather = function(selectedCity) {
      
     fetch(selectedCity).then(function(response) {
@@ -138,31 +125,25 @@ var displayWeather = function(selectedCity) {
 
 
 
-  // var currentWeatherEl = document.createElement("p");
-    // currentWeatherEl.textContent = selectedCity
-    // weatherSpecsEl.appendChild(currentWeatherEl);
 
 
-
-    var getCityName = function(city) {
-        //format the github api url
-        var cityName = ("https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=6ba36869088d690b197fddb2f2b348d2");
+/////////////Gets City Name from API and writes it to screen within border box along with the time/////////////////
+var getCityName = function(city) {
+    //format the github api url
+    var cityName = ("https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=6ba36869088d690b197fddb2f2b348d2");
     
-        //make a request to the url
-        fetch(cityName).then(function(response) {
-            response.json().then(function(data) {
+    //make a request to the url
+    fetch(cityName).then(function(response) {
+        response.json().then(function(data) {
 
                 
-            var currentWeatherEl = document.createElement("h3");
-            currentWeatherEl.textContent = data[0].name + " (" + moment().format('l') + ")"
-            weatherSpecsEl.classList.add('weather-specs');
-            weatherSpecsEl.append(currentWeatherEl);
-
-            
-
-            });
-        })
-    };
+        var currentWeatherEl = document.createElement("h3");
+        currentWeatherEl.textContent = data[0].name + " (" + moment().format('l') + ")"
+        weatherSpecsEl.classList.add('weather-specs');
+        weatherSpecsEl.append(currentWeatherEl);
+        });
+    })
+};
 
 
 
@@ -406,3 +387,51 @@ var displayForecast5 = function(selectedCity) {
     
 
 } ;
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+var recentSearchesEl = document.querySelector("#recentSearches")
+
+
+// Tips how to add to local storage here https://stackoverflow.com/questions/19635077/adding-objects-to-array-in-localstorage
+var storedSearches = function (event) {
+
+    /////////////Storing into Local Storage//////////////////
+    event.preventDefault();
+
+    var existingEntries = JSON.parse(localStorage.getItem("allCities"));
+    if(existingEntries == null) existingEntries = [];
+    
+    var city = {cityList: cityInputEl.value.trim()}
+
+    // set new submission to local storage 
+    localStorage.setItem('allCities', JSON.stringify(city));
+    //Save all entries back to local storage instead of overwriting them
+    existingEntries.push(city);
+    localStorage.setItem("allCities", JSON.stringify(existingEntries));
+
+};
+
+
+
+cityFormEl.addEventListener("submit", function() {
+    storedSearches(event);
+    formSubmitHandler(event);
+    DisplayRecentSearches(event);
+});
+
+
+//////////////////Displays Recent Searches on Screen/////////////////////
+
+var city1 = JSON.parse(localStorage.getItem("allCities")); 
+ 
+
+console.log(city1[0].cityList)
+
+var search1 = document.createElement("button")
+search1.textContent = city1[0].cityList
+recentSearchesEl.append(search1);
