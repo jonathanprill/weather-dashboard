@@ -1,9 +1,9 @@
 // API CALL https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
 
-// API KEY 6ba36869088d690b197fddb2f2b348d2
+var APIKey = "8b1d28cac6a73bc6e73aa1456257a409-REMOVE"
 
 //API COORDINATES BY CITY NAME http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key} 
-    //Ex: https://api.openweathermap.org/geo/1.0/direct?q=London&limit=1&appid=6ba36869088d690b197fddb2f2b348d2
+    //Ex: https://api.openweathermap.org/geo/1.0/direct?q=London&limit=1&appid=8b1d28cac6a73bc6e73aa1456257a409
 
 
 
@@ -20,6 +20,8 @@ var forecastThreeEl = document.querySelector("#forecast-3");
 var forecastFourEl = document.querySelector("#forecast-4");
 var forecastFiveEl = document.querySelector("#forecast-5");
 
+var button1 = document.querySelector("#btn-1")
+var button2 = document.querySelector("#btn-2")
 
 
 /////////////On Submit Click/////////////////
@@ -52,13 +54,13 @@ var formSubmitHandler = function(event) {
 /////////////Converting city name to lat and lon/////////////////
 var getCityCoords = function(city) {
     //format the github api url
-    var ApiCoords = ("https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=6ba36869088d690b197fddb2f2b348d2");
+    var ApiCoords = ("https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + APIKey);
 
     //make a request to the url
     fetch(ApiCoords).then(function(response) {
         if (response.ok) {
         response.json().then(function(data) {
-            var selectedCity = ("https://api.openweathermap.org/data/2.5/onecall?lat=" + data[0].lat + "&lon=" + data[0].lon + "&units=imperial&appid=6ba36869088d690b197fddb2f2b348d2");
+            var selectedCity = ("https://api.openweathermap.org/data/2.5/onecall?lat=" + data[0].lat + "&lon=" + data[0].lon + "&units=imperial&appid=" + APIKey);
             displayWeather(selectedCity);
             displayForecast(selectedCity);
             displayForecast2(selectedCity);
@@ -130,7 +132,7 @@ var displayWeather = function(selectedCity) {
 /////////////Gets City Name from API and writes it to screen within border box along with the time/////////////////
 var getCityName = function(city) {
     //format the github api url
-    var cityName = ("https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=6ba36869088d690b197fddb2f2b348d2");
+    var cityName = ("https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + APIKey);
     
     //make a request to the url
     fetch(cityName).then(function(response) {
@@ -391,7 +393,6 @@ var displayForecast5 = function(selectedCity) {
 
 
 
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var recentSearchesEl = document.querySelector("#recentSearches")
@@ -414,24 +415,64 @@ var storedSearches = function (event) {
     existingEntries.push(city);
     localStorage.setItem("allCities", JSON.stringify(existingEntries));
 
+    /////////////////////Sets 5 most recent searches in local storage array////////////////////////////////
+
+    const savedCities = localStorage.getItem('scoreKey') || '[]' // get the score, or the initial value if empty
+    const Onecity = [...JSON.parse(savedCities), city] // add the result
+        .slice(-5) // take 5 most recent searches
+    localStorage.setItem('scoreKey', JSON.stringify(Onecity))
+
+    ///////////////////////////A button will appear on screen once button is clicked up until 5 buttons/////////////////////
+    
+    var city1 = JSON.parse(localStorage.getItem("scoreKey"))
+
+    var search1 = document.createElement("button")
+    search1.textContent = city1[0].cityList
+    button1.replaceWith(search1);
+    console.log(city1[0].cityList)
+
+    var search2 = document.createElement("button")
+    search2.textContent = city1[1].cityList
+    button2.replaceWith(search2);
+
+
 };
+
+
+
+// var city1 = JSON.parse(localStorage.getItem("scoreKey")) || '[]'
+// // var search1 = document.createElement("button")
+// // search1.textContent = city1[0].cityList
+// // recentSearchesEl.append(search1);
+// console.log(city1[0].cityList)
+
+
+//////////////////Displays Recent Searches on Screen/////////////////////
+
+// var city1 = JSON.parse(localStorage.getItem("allCities")); 
+
+// var displayCities = function() {
+//     var search1 = document.createElement("button")
+//     search1.textContent = city1.slice(-1)[0].cityList
+//     recentSearchesEl.append(search1);
+//     console.log(city1.slice(-1)[0].cityList)
+// }
+
+
+
+
+///////////////////////////////////////////////////////////////////////////
+
+
+
 
 
 
 cityFormEl.addEventListener("submit", function() {
     storedSearches(event);
     formSubmitHandler(event);
-    DisplayRecentSearches(event);
+    //DisplayRecentSearches(event);
+    
 });
 
 
-//////////////////Displays Recent Searches on Screen/////////////////////
-
-var city1 = JSON.parse(localStorage.getItem("allCities")); 
- 
-
-console.log(city1[0].cityList)
-
-var search1 = document.createElement("button")
-search1.textContent = city1[0].cityList
-recentSearchesEl.append(search1);
