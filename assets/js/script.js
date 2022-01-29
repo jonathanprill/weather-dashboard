@@ -1,6 +1,6 @@
 // API CALL https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
 
-var APIKey = "8b1d28cac6a73bc6e73aa1456257a409-REMOVE"
+var APIKey = "8b1d28cac6a73bc6e73aa1456257a409"
 
 //API COORDINATES BY CITY NAME http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key} 
     //Ex: https://api.openweathermap.org/geo/1.0/direct?q=London&limit=1&appid=8b1d28cac6a73bc6e73aa1456257a409
@@ -23,13 +23,14 @@ var forecastFiveEl = document.querySelector("#forecast-5");
 var button1 = document.querySelector("#btn-1")
 var button2 = document.querySelector("#btn-2")
 
+var recentSearchOne = document.querySelector("#recent-search-1")
 
 /////////////On Submit Click/////////////////
-var formSubmitHandler = function(event) {
+var formSubmitHandler = function(NewCity) {
     event.preventDefault();
     
     //gets value from input element
-    var city = cityInputEl.value.trim();
+    var city = cityInputEl.value.trim() || NewCity;
 
     if(city) {
         getCityCoords(city);
@@ -110,10 +111,20 @@ var displayWeather = function(selectedCity) {
                 currentHumidityEl.textContent = "Humidity: " + data.current.humidity + " %"
                 weatherSpecsEl.append(currentHumidityEl);
 
-                //Displays current UV Index
+                //Displays current UV Index with color-coded numbers
+                var UVIndexDiv = document.createElement("div")
+                weatherSpecsEl.append(UVIndexDiv)
+                UVIndexDiv.classList.add('uv-index-div')
+
+                var UVIndexVar = document.createElement("p")
+                UVIndexVar.textContent = "UV Index: "
+                                
                 var currentUVIndexEl = document.createElement("p")
-                currentUVIndexEl.textContent = "UV Index: " + data.current.uvi
-                weatherSpecsEl.append(currentUVIndexEl);
+                currentUVIndexEl.textContent = data.current.uvi
+                if (data.current.uvi < 2) {currentUVIndexEl.classList.add('uv-index-green')
+                } else if (data.current.uvi < 5) {currentUVIndexEl.classList.add('uv-index-yellow')
+                } else  {currentUVIndexEl.classList.add('uv-index-red')}
+                UVIndexDiv.append(UVIndexVar, currentUVIndexEl);
                
 
             });
@@ -424,18 +435,23 @@ var storedSearches = function (event) {
 
     ///////////////////////////A button will appear on screen once button is clicked up until 5 buttons/////////////////////
     
-    var city1 = JSON.parse(localStorage.getItem("scoreKey"))
+    for (let i = 0; i < 1; i++) {
 
-    var search1 = document.createElement("button")
-    search1.textContent = city1[0].cityList
-    button1.replaceWith(search1);
-    console.log(city1[0].cityList)
+        var city1 = JSON.parse(localStorage.getItem("scoreKey"))
 
-    var search2 = document.createElement("button")
-    search2.textContent = city1[1].cityList
-    button2.replaceWith(search2);
+        var search1 = document.createElement("button")
+        search1.textContent = city1.slice(-1)[0].cityList
+        recentSearchOne.appendChild(search1);
+        
+    };
 
+    search1.addEventListener('click', function(e) {
 
+        var NewCity = e.currentTarget.innerText
+        formSubmitHandler(NewCity);
+        console.log(e.currentTarget.innerText);
+
+    });
 };
 
 
