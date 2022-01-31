@@ -417,9 +417,9 @@ var storedSearches = function (event) {
 
     var existingEntries = JSON.parse(localStorage.getItem("allCities"));
     if(existingEntries == null) existingEntries = [];
+    var cityInput = cityInputEl.value.trim()
+    var city = {cityList: cityInput}
     
-    var city = {cityList: cityInputEl.value.trim()}
-
     // set new submission to local storage 
     localStorage.setItem('allCities', JSON.stringify(city));
     //Save all entries back to local storage instead of overwriting them
@@ -428,23 +428,23 @@ var storedSearches = function (event) {
 
     /////////////////////Sets 5 most recent searches in local storage array////////////////////////////////
 
-    const savedCities = localStorage.getItem('scoreKey') || '[]' // get the score, or the initial value if empty
+    const savedCities = localStorage.getItem('fiveCities') || '[]' // get the score, or the initial value if empty
     const Onecity = [...JSON.parse(savedCities), city] // add the result
         .slice(-5) // take 5 most recent searches
-    localStorage.setItem('scoreKey', JSON.stringify(Onecity))
+    localStorage.setItem('fiveCities', JSON.stringify(Onecity))
 
     ///////////////////////////A button will appear on screen once button is clicked up until 5 buttons/////////////////////
-    
+    if (cityInput) {
     for (let i = 0; i < 1; i++) {
 
-        var city1 = JSON.parse(localStorage.getItem("scoreKey"))
+        var city1 = JSON.parse(localStorage.getItem("fiveCities"))
 
         var search1 = document.createElement("button")
         search1.textContent = city1.slice(-1)[0].cityList
         recentSearchOne.appendChild(search1);
         
     };
-
+    }
     search1.addEventListener('click', function(e) {
 
         var NewCity = e.currentTarget.innerText
@@ -454,25 +454,6 @@ var storedSearches = function (event) {
     });
 };
 
-
-
-// var city1 = JSON.parse(localStorage.getItem("scoreKey")) || '[]'
-// // var search1 = document.createElement("button")
-// // search1.textContent = city1[0].cityList
-// // recentSearchesEl.append(search1);
-// console.log(city1[0].cityList)
-
-
-//////////////////Displays Recent Searches on Screen/////////////////////
-
-// var city1 = JSON.parse(localStorage.getItem("allCities")); 
-
-// var displayCities = function() {
-//     var search1 = document.createElement("button")
-//     search1.textContent = city1.slice(-1)[0].cityList
-//     recentSearchesEl.append(search1);
-//     console.log(city1.slice(-1)[0].cityList)
-// }
 
 
 
