@@ -19,11 +19,10 @@ var forecastTwoEl = document.querySelector("#forecast-2");
 var forecastThreeEl = document.querySelector("#forecast-3");
 var forecastFourEl = document.querySelector("#forecast-4");
 var forecastFiveEl = document.querySelector("#forecast-5");
-
-var button1 = document.querySelector("#btn-1")
-var button2 = document.querySelector("#btn-2")
-
 var recentSearchOne = document.querySelector("#recent-search-1")
+// var button1 = document.querySelector("#btn-1")
+// var button2 = document.querySelector("#btn-2")
+
 
 /////////////On Submit Click/////////////////
 var formSubmitHandler = function(NewCity) {
@@ -404,7 +403,8 @@ var displayForecast5 = function(selectedCity) {
 
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////Storing into Local Storage//////////////////
 
 var recentSearchesEl = document.querySelector("#recentSearches")
 
@@ -412,7 +412,7 @@ var recentSearchesEl = document.querySelector("#recentSearches")
 // Tips how to add to local storage here https://stackoverflow.com/questions/19635077/adding-objects-to-array-in-localstorage
 var storedSearches = function (event) {
 
-    /////////////Storing into Local Storage//////////////////
+    
     event.preventDefault();
 
     var existingEntries = JSON.parse(localStorage.getItem("allCities"));
@@ -455,13 +455,7 @@ var storedSearches = function (event) {
 };
 
 
-
-
-
-///////////////////////////////////////////////////////////////////////////
-
-
-
+/////////////////////////////////////////////////////
 
 
 
